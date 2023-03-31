@@ -7,7 +7,6 @@ on:
 
 jobs:
   add-pr-to-ecosystem-events-review-board:
-    if: contains(github.event.pull_request.requested_reviewers.*.login, 'yxnyxnyxnyxnyxnyxn')
     permissions:
       issues: write
     runs-on: ubuntu-latest
