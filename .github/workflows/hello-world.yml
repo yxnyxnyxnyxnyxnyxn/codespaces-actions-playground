@@ -1,11 +1,19 @@
-name: Hello world
+name: "Test pr"
 
-on: [push]
+on: 
+  pull_request:
+    types: 
+      - opened
 
 jobs:
-  hello-world:
+  add-pr-to-ecosystem-events-review-board:
+    if: contains(github.event.pull_request.requested_reviewers.*.login, 'yxnyxnyxnyxnyxnyxn')
+    permissions:
+      issues: write
     runs-on: ubuntu-latest
     steps:
-      - name: Hello world
-        run: |
-          echo "Hello world"
+    - name: 'Add PR to Ecosystem Events Review Board - Ready For Review'
+      uses: actions/add-to-project@v0.4.1
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        project-url: "https://github.com/users/yxnyxnyxnyxnyxnyxn/projects/1"
